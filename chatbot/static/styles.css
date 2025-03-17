@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     color: white;
+    text-align: center;
 }
 .container {
     width: 80%;    
@@ -22,28 +23,29 @@ form {
 label {
     margin-bottom: 10px;
 }
+
 input[type="text"], input[type="file"] {
     margin-bottom: 20px;
-    width: 60%;
+    margin-top: 20px;
+    width: 70%;
     height: 40px;
     padding: 10px;
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 10px;
     max-width: 600px;
+    background: #404045;
+    border: none;
+    color: white;
 }
 
 pre {    
     display: none;
     font-size: 16px;
-    max-width: 800px;
-    max-height: 600px;
-    overflow-y: auto;    
-    padding: 10px;    
-    white-space: pre-wrap; /* Ensures long text wraps properly */
-    margin: 10px auto;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a soft shadow */
-    border-radius: 5px; /* Rounds the corners slightly */
-    box-shadow: 10px 10px 10px black;
+    max-width: 800px;   
+    max-height: 600px;         
+    white-space: normal;    
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .spinner {
@@ -67,4 +69,26 @@ pre {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.chat-history {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+}
+
+.user-message {
+    background-color: #414158;
+    color: white;
+    padding: 10px;
+    text-align: right;    
+    border-radius: 8px;
+    align-self: flex-end; /* Push to the right */
+}
+
+.assistant-message {
+    width: 100%;    
+    color: white;
+    padding: 20px;
+    text-align: left;    
 }

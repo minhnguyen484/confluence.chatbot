@@ -9,14 +9,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>What can I help with?</h1>
-        <form id="chat-form">
-            <input type="text" id="question" name="question" required placeholder="Prompt" />
-        </form>
-        
+        <h4 id="title">What can I help with?</h4>
+
+        <div id="chat-history" class="chat-history">            
+        </div>
+
         <div class="spinner" id="spinner"></div>
         <div class="spinner-text" id="spinner_text">Processing...</div>
-        <pre id="response"></pre>
+        
+        <form id="chat-form">
+            <input type="text" id="question" name="question" required placeholder="Prompt" />
+        </form>                
     </div>
 
     <script>
@@ -27,17 +30,30 @@
                 let question = this.value.trim();
                 if (question === "") return;  // Ignore empty input
 
-                let responseContainer = document.getElementById("response");
+                let chatHistory = document.getElementById("chat-history");
+                let title = document.getElementById("title");                
                 let spinner = document.getElementById("spinner");
                 let spinnerText = document.getElementById("spinner_text");
 
-                responseContainer.textContent = "";  // Clear old response                
+                // Create new elements for the question and response
+                let questionElement = document.createElement("div");
+                questionElement.classList.add("message-container", "user-message");
+                questionElement.textContent = question;
+                
+                let responseContainer = document.createElement("pre");
+                responseContainer.classList.add("message-container", "assistant-message");
+
+                chatHistory.appendChild(questionElement); // Append user question
+                chatHistory.appendChild(responseContainer); // Append response container
+
+                this.value = ""; // Clear input field           
                 spinner.style.display = "block";  // Show spinner
                 spinnerText.style.display = "block";  // Show spinner
 
                 let eventSource = new EventSource("/stream?question=" + encodeURIComponent(question));
 
                 eventSource.onmessage = function(event) {
+                    title.textContent = "Visual Assistant Ready to Help";                    
                     responseContainer.style.display = "block";
                     responseContainer.textContent += event.data + " ";  // Append streamed data
                     spinner.style.display = "none";  // Hide spinner once response starts
