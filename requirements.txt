@@ -1,0 +1,14 @@
+requests
+python-dotenv
+sentence-transformers
+langchain
+langchain-community
+langchain-openai
+faiss-cpu  # For vector storage
+openai  # For LLM
+fastapi  # For chatbot API
+uvicorn  # Run FastAPI server
+beautifulsoup4 # Clean the text
+PyPDF2
+flask
+tiktoken
